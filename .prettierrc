@@ -1,0 +1,6 @@
+{
+  // 这个是不添加分号
+  "semi": false,
+  // 这个是改成单引号
+  "singleQuote": true
+}
