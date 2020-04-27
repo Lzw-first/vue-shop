@@ -12,6 +12,13 @@ import axios from 'axios'
 // 导入table-tree 插件
 import TreeTable from 'vue-table-with-tree-grid'
 
+// 导入富文本编辑器
+import VueQuillEditor from 'vue-quill-editor'
+// 导入富文本对应样式表
+import 'quill/dist/quill.core.css' // import styles
+import 'quill/dist/quill.snow.css' // for snow theme
+import 'quill/dist/quill.bubble.css' // for bubble theme
+
 Vue.component('tree-table', TreeTable)
 
 // 设置默认地址
@@ -30,7 +37,22 @@ axios.interceptors.request.use(
   }
 )
 
+Vue.filter('dataFormat', function(obj) {
+  const dt = new Date(obj)
+
+  const y = dt.getFullYear()
+  const m = (dt.getMonth() + 1 + '').padStart(2, '0')
+  const d = (dt.getDate() + '').padStart(2, '0')
+
+  const hh = (dt.getHours() + '').padStart(2, '0')
+  const mm = (dt.getMinutes() + '').padStart(2, '0')
+  const ss = (dt.getSeconds() + '').padStart(2, '0')
+
+  return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
+})
+
 Vue.config.productionTip = false
+Vue.use(VueQuillEditor)
 
 new Vue({
   router,
